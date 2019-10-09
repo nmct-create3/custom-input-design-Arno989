@@ -72,14 +72,21 @@
 	--global-transition-transform: transform 40ms cubic-bezier(0.42, 0, 0.58, 1);
 	--global-transition-width: width 120ms cubic-bezier(0.42, 0, 0.58, 1);
 
-	--global-page-color: var(--color-neutral-xxxx-dark);
-    --global-page-backgroundColor: var(--color-neutral-xxxx-light);
+	/* dark mode */
+
+	--global-page-textcolor: var(--global-color-neutral-xxxx-dark);
+	--global-page-backgroundColor: var(--global-color-neutral-xxxx-light);
+	--global-page-secondaryColor: white;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --global-page-color: White;
-        --global-page-backgroundColor: var(--color-neutral-xxxx-dark);
+		--global-page-textcolor: White;
+		--global-page-labelcolor: var(--global-color-neutral-x-light);
+		--global-page-backgroundColor: var(--global-color-neutral-xxxx-dark);
+		--global-page-secondaryColor: var(--global-color-neutral-xxx-dark);
+		--global-input-backgroundColor: var(--global-page-backgroundColor);
+		--global-input-borderColor: var(--global-page-backgroundColor);
     }
 }
 
@@ -97,18 +104,13 @@ html {
 	font-size: 16px;
 	line-height: 1.5;
 	font-family: 'Inter Web', Helvetica, arial, sans-serif;
-	color: var(--global-page-color); 
+	color: var(--global-page-textcolor); 
     background-color: var(--global-page-backgroundColor);
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-    html {
-        background-color: var(--color-neutral-xxxx-dark);
-    }
-}
 
 *,
 *:before,
@@ -571,7 +573,7 @@ input::placeholder {
 */
 
 .c-card {
-	background-color: White;
+	background-color: var(--global-page-secondaryColor);
 	margin-bottom: var(--global-whitespace);
 	border-radius: var(--global-borderRadius);
 	box-shadow: 0 0 0 var(--global-borderWidth) rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.075);
@@ -586,7 +588,7 @@ input::placeholder {
 
 .c-card__footer {
 	text-align: center;
-	border-top: var(--global-borderWidth) solid var(--global-color-neutral-xxx-light);
+	border-top: var(--global-borderWidth) solid var(--global-page-backgroundColor);
 }
 
 .c-card__title {
@@ -643,7 +645,6 @@ input::placeholder {
 	border: var(--global-borderWidth) solid var(--global-color-neutral-xxx-light);
 	border-radius: var(--global-borderRadius);
 	color: var(--global-color-neutral-xxxx-dark);
-	background-color: White;
 	font-family: inherit;
 	font-size: 16px;
 	line-height: calc(var(--global-baseline) * 3);
@@ -651,8 +652,8 @@ input::placeholder {
 	outline: none;
 	transition: border var(--global-transition-timing-alpha);
 
-	border: var(--input-borderWidth, var(--global-borderWidth)) solid var(--input-borderColor, var(--global-input-borderColor));
-	background-color: var(--input-backgroundColor, var(--global-input-backgroundColor));
+	border: var(--input-borderWidth, var(--global-borderWidth)) solid var(--global-input-borderColor);
+	background-color: var(--global-input-backgroundColor);
 	color: var(--global-input-color);
 }
 
@@ -725,7 +726,8 @@ input::placeholder {
 	width: 16px;
 	height: 16px;
 	margin-right: var(--global-whitespace-sm);
-	border: var(--global-borderWidth) solid var(--global-color-neutral-xxx-light);
+	border: var(--global-borderWidth) solid var(--global-input-borderColor);
+	background-color: var(--global-page-backgroundColor)
 }
 
 .c-custom-option:hover .c-custom-option__fake-input,
@@ -841,6 +843,7 @@ input::placeholder {
 
 .c-custom-select {
 	display: block;
+	position: relative;
 }
 
 .c-custom-select__symbol{
@@ -850,6 +853,8 @@ input::placeholder {
 	scroll-padding-right: 1px;
 	height: 24px;
 	width: 24px;
+	right: 16px;
+	top: 12px;
 }
 
 /*
@@ -863,7 +868,7 @@ input::placeholder {
 	font-size: 14px;
 	padding-bottom: var(--global-whitespace-xs);
 	line-height: calc(var(--global-baseline) * 2);
-	color: var(--global-color-neutral-xx-dark);
+	color: var(--global-page-labelcolor);
 }
 
 .c-label--option {
